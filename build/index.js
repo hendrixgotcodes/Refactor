@@ -37,17 +37,17 @@ yargs
         fromExt: {
             describe: "Meant to abbreviate FromExtension. This option takes the file extensions the user intends to change.",
             alias: "frEx",
+            type: "string"
         },
         toExt: {
             describe: "Meant to abbreviate ToExtension. This option takes the extension form the user desires to give the file(s) under operation.",
             alias: "toEx",
+            type: "string"
         },
     },
     handler: (arg) => {
-        console.log(arg);
-        if ((arg.file && !arg.fromExt && !arg.toExt) || (arg.file && arg.fromExt))
-            return console.log("The '--file' argument is dependent on '--fromExt' and '--toExt' arguments.");
-        return;
+        if ((arg.file && !arg.fromExt && !arg.toExt) || (arg.file && arg.fromExt && !arg.toExt) || (arg.file && !arg.fromExt && arg.toExt))
+            return console.log("The '--file' argument is dependent on both '--fromExt' and '--toExt' arguments.");
         if (path.isAbsolute(arg.path)) {
             console.log(true);
         }
@@ -86,30 +86,34 @@ function printInfo() {
 }
 function renameFileRecursive(arg) {
     return __awaiter(this, void 0, void 0, function* () {
-        const _folderPath = path.resolve(arg.path);
-        const extension = arg.extension;
+        const folderPath = path.resolve(arg.path);
+        const finalExtension = arg.toExt;
+        const initialExtension = arg.fromExt;
         const newFileNames = [];
         const oldFileNames = [];
         try {
-            const existingFiles = yield fs.readdir(_folderPath);
-            const splittedFolderPath = _folderPath.split("\\");
-            splittedFolderPath.splice(-1);
-            const folderPath = splittedFolderPath.join("\\");
+            const existingFiles = yield fs.readdir(folderPath);
             for (const file of existingFiles) {
                 const splitted = file.split(".");
-                const oldFileName = folderPath + "\\" + file;
-                let newFileName = "";
-                for (let i = 0; i < splitted.length - 1; i++) {
-                    newFileName += splitted[i];
+                if (splitted[splitted.length - 1] === initialExtension) {
+                    const oldFileName = folderPath + "\\" + file;
+                    let newFileName = "";
+                    for (let i = 0; i < splitted.length - 1; i++) {
+                        newFileName += splitted[i];
+                    }
+                    newFileName = folderPath + "\\" + newFileName + "." + finalExtension;
+                    newFileNames.push(newFileName);
+                    oldFileNames.push(oldFileName);
                 }
-                newFileName = folderPath + "\\" + newFileName + "." + extension;
-                newFileNames.push(newFileName);
-                oldFileNames.push(oldFileName);
                 // await fs.rename(oldFileName, newFileName)
             }
-            console.log(newFileNames, oldFileNames);
+            for (let i = 0; i <= newFileNames.length - 1; i++) {
+                yield fs.rename(oldFileNames[i], newFileNames[i]);
+            }
         }
-        catch (error) { }
+        catch (error) {
+            console.log(error);
+        }
     });
 }
 function renameFile(arg) {
@@ -119,7 +123,7 @@ function renameFile(arg) {
     for (let i = 0; i < splitted.length - 1; i++) {
         newFilePath = splitted[i];
     }
-    newFilePath += "." + arg.extension;
+    newFilePath += "." + arg.toExt;
     fs.rename(oldFilePath, newFilePath);
 }
 function _(arg0, arg1, _, arg3) {

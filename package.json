@@ -4,7 +4,8 @@
   "description": "CLI to aid developers in refactoring",
   "main": "index.js",
   "scripts": {
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "build": "tsc src/index.ts -w"
   },
   "repository": {
     "type": "git",

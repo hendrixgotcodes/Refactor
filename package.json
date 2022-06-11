@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint . ",
     "lint:fix": "eslint . --fix",
-    "build": "tsc src/index.ts -w"
+    "build": "tsc src/index.ts -w",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,16 @@
   },
   "homepage": "https://github.com/hendrixgotcodes/Refactor#readme",
   "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
     "@types/figlet": "^1.5.4",
     "@types/gradient-string": "^1.1.2",
     "@types/prompts": "^2.0.14",
     "@types/yargs": "^12.0.2",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -51,5 +56,10 @@
     "ora": "^6.1.0",
     "yargs": "^12.0.2"
   },
-  "type": "module"
+  "type": "module",
+  "config": {
+    "commitizen":{
+      "path": "cz-conventional-changelog"
+    }
+  }
 }

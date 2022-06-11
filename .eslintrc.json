@@ -23,5 +23,5 @@
         "operator-linebreak": ["error", "after"],
         "no-console": "off" //this is a cli for Christ's sake😆
     },
-    "ignorePatterns": ["build", "node_modules", "test"]
+    "ignorePatterns": ["build", "node_modules", "test", ".github"]
 }

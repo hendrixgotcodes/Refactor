@@ -21,7 +21,6 @@
         "linebreak-style": ["error", "windows"],
         "@typescript-eslint/quotes": ["error", "double"],
         "operator-linebreak": ["error", "after"],
-        "no-console": "off" //this is a cli for Christ's sake😆
+        "no-console": "off"
     }
-    // "ignorePatterns": ["build", "node_modules", "test", ".*", "*.config.js"]
 }

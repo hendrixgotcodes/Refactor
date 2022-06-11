@@ -88,7 +88,7 @@ async function renameFolder(args: any) {
     spinner.start();
 
     await Promise.all(operations);
-    spinner.success({text: "done"});
+    spinner.success({ text: "done" });
   } catch (error) {
     console.log(error);
   }

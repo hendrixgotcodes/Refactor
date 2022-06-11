@@ -1,7 +1,9 @@
-import path from "path";
-import fs from "fs/promises";
+import * as path from "path";
+import * as fs from "fs/promises";
+import * as inquirer from "inquirer";
+import { createSpinner } from "nanospinner";
 
-async function renameFileRecursive(arg: any) {
+async function renameFiles(arg: any) {
   const folderPath: string = path.resolve(arg.path);
   const finalExtension: string = arg.toExt;
   const initialExtension: string = arg.fromExt;
@@ -42,6 +44,56 @@ async function renameFileRecursive(arg: any) {
   }
 }
 
+interface IPromptMessage {
+  name: string;
+  message: string;
+}
+
+async function renameFolder(args: any) {
+  try {
+    const folderPath = path.resolve(args.path);
+    const promptMessages: IPromptMessage[] = [];
+
+    const res = await fs.readdir(folderPath, {
+      withFileTypes: true,
+    });
+
+    res.forEach((file) => {
+      if (file.isDirectory()) {
+        promptMessages.push({
+          name: file.name,
+          message: `rename ${file.name}`,
+        });
+      }
+    });
+
+    const answers: { [key: string]: string } = await inquirer.prompt(
+      // eslint-disable-next-line
+      promptMessages
+    );
+
+    const operations: Promise<any>[] = [];
+
+    /* eslint-disable @typescript-eslint/comma-dangle */
+    promptMessages.forEach((prompt) => {
+      operations.push(
+        fs.rename(
+          path.resolve(args.path, prompt.name),
+          path.resolve(args.path, answers[prompt.name])
+        )
+      );
+    });
+
+    const spinner = createSpinner("refactoring");
+    spinner.start();
+
+    await Promise.all(operations);
+    spinner.success({text: "done"});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function handler(arg: any) {
   if (arg.file) {
     if (
@@ -55,7 +107,9 @@ export default function handler(arg: any) {
       );
       return;
     }
-    if (!path.isAbsolute(arg.path)) renameFileRecursive(arg);
+    if (!path.isAbsolute(arg.path)) renameFiles(arg);
+  } else if (arg.directory) {
+    renameFolder(arg);
   }
 
   //   if (arg.directory) {

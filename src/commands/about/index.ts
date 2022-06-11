@@ -1,5 +1,5 @@
-import figlet from "figlet";
-import gradient from "gradient-string";
+import * as figlet from "figlet";
+import * as gradient from "gradient-string";
 import { CommandModule } from "yargs";
 
 function printInfo() {

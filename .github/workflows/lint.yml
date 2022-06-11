@@ -17,16 +17,12 @@ jobs:
     steps:
       - name: Checkout git repo
         uses: actions/checkout@v3
-
-      - name: Setup node
-        uses: actions/setup-node@v3
         with:
-          node-version: 18
-
-      - name: Install nodejs dependencies
-        run: npm ci
+          fetch-depth: 0
 
       - name: Start linting
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
+        uses: github/super-linter@v4
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master

@@ -1,5 +1,3 @@
-"use strict";
-
 import { CommandModule } from "yargs";
 import builder from "./builder";
 import handler from "./handler";

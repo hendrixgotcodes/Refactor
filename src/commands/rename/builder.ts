@@ -13,12 +13,6 @@ const builder: CommandBuilder<{}, unknown> = {
     type: "boolean",
     alias: "f",
   },
-  directory: {
-    describe:
-      "Boolean to indicate if you are refactoring directory(s). By default this is false.",
-    type: "boolean",
-    alias: "dir",
-  },
   fromExt: {
     describe:
       "Meant to abbreviate FromExtension. This option takes the file extensions the user intends to change.",

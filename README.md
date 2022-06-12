@@ -12,7 +12,6 @@ A light weight CLI tool designed to make developers more robust in refactoring l
 *Refactor is in it's early stages. Your contributions and suggestions are more than welcome 😎*
 
 ## Installation
----
 ### Using npm
 To install this CLI using npm run; 
 >npm install refactor -g
@@ -20,7 +19,6 @@ To install this CLI using npm run;
 This will install the CLI and make it globally available.
 
 ## Commands
----
 There are currently two main commands. One comes with several options which enables you two perform more sophisticated tasks.
 
 | Command | Description                    |
@@ -31,7 +29,6 @@ There are currently two main commands. One comes with several options which enab
 
 
 ## Usage
----
 
 ### about
 You can use the about command as so;

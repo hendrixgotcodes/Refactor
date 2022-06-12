@@ -95,7 +95,7 @@ async function renameFolder(args: any) {
 }
 
 export default function handler(arg: any) {
-  if (arg.file) {
+  if (arg.file === true) {
     if (
       (!arg.fromExt && !arg.toExt) ||
       (arg.fromExt && !arg.toExt) ||
@@ -108,7 +108,7 @@ export default function handler(arg: any) {
       return;
     }
     if (!path.isAbsolute(arg.path)) renameFiles(arg);
-  } else if (arg.directory) {
+  } else if (arg.file === false) {
     renameFolder(arg);
   }
 

@@ -44,25 +44,30 @@ The arguments are as followed
 - --path: The path to the directory of operation. This argument is always demanded. <br/> 
 Example usage: <br/>
 `refactor rename --path="."` <br/>
-type: *string*  | required: *yes*
+type: *string*  | required: *true*
+<br/><br/>
 
-- --file: Use this argument to indicate you want to perform the operation on files rather than directories.<br/>
+- --file: Consider this argument as toggler. Set it to true if you want to perform the operation on files, false if directories.<br/>
 Example usage: <br/>
 `refactor rename --path="." --file=true` <br/>
-type: *string*  | required: *if **--directory** flag is not provided.*
+type: *string*  | required: *true*
+<br/><br/>
 
-- --directory: Use this argument to indicate you want to perform the operation on directories rather than files.<br/>
-Example usage: <br/>
-`refactor rename --path="." --directory=true` <br/>
-type: *string*  | required: *if **--file** flag is not provided.*
 
 - fromExt: The file extension you want to change. Used alongside --toExt argument. <br/>
 Example usage: <br/>
 `refactor rename --path="." --file=true --fromExt="js" --toExt="ts"` <br/>
 type: *string*  | required: *if *--file* is set to true*
+<br/><br/>
 
 - toExt: The final extension you want for your files. Used alongside --fromExt argument. <br/>
 Example usage: <br/>
 `refactor rename --path="." --file=true --fromExt="js" --toExt="ts"` <br/>
 type: *string*  | required: *if *--file* is set to true*
+<br/><br/>
+
+- exclude: Use this argument incase you have some files you want to exclude from the operation.<br/>
+Example usage: <br/>
+`refactor rename --path="." --file=true --fromExt="js" --toExt="ts" --exclude="a.js, b.js, c.js"` <br/>
+
 

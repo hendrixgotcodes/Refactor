@@ -12,6 +12,7 @@ const builder: CommandBuilder<{}, unknown> = {
       "Boolean to indicate if you are refactoring file(s). By default this is true.",
     type: "boolean",
     alias: "f",
+    demandOption: true,
   },
   fromExt: {
     describe:
@@ -23,6 +24,12 @@ const builder: CommandBuilder<{}, unknown> = {
     describe:
       "Meant to abbreviate ToExtension. This option takes the extension form the user desires to give the file(s) under operation.",
     alias: "toEx",
+    type: "string",
+  },
+  exclude: {
+    describe:
+      "Use this to indicate the files you intend to exclude from modification. This argument is only useful when --file=true.",
+    alias: "ex",
     type: "string",
   },
 };

@@ -2,18 +2,32 @@ import * as path from "path";
 import * as fs from "fs/promises";
 import * as inquirer from "inquirer";
 import { createSpinner } from "nanospinner";
+import lodash from "lodash";
 
 async function renameFiles(arg: any) {
   const folderPath: string = path.resolve(arg.path);
   const finalExtension: string = arg.toExt;
   const initialExtension: string = arg.fromExt;
+
+  const existingFiles: string[] = [];
   const newFileNames: string[] = [];
   const oldFileNames: string[] = [];
 
-  try {
-    const existingFiles = await fs.readdir(folderPath);
+  let excludedFiles: string[] = arg.exclude ? arg.exclude.split(",") : [];
+  excludedFiles = excludedFiles.map((file) => file.trim());
 
-    existingFiles.forEach((file) => {
+  try {
+    const dirContent = await fs.readdir(folderPath, {
+      withFileTypes: true,
+    });
+
+    dirContent.forEach((content) => {
+      if (content.isFile()) existingFiles.push(content.name);
+    });
+
+    const filesToBeChanged = lodash.difference(existingFiles, excludedFiles);
+
+    filesToBeChanged.forEach((file) => {
       const splitted = file.split(".");
 
       if (splitted[splitted.length - 1] === initialExtension) {

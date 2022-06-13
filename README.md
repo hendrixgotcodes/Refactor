@@ -9,7 +9,7 @@ A light weight CLI tool designed to make developers more robust in refactoring l
 - Rename multiple files much more faster than the traditional way
 - Rename multiple directories
 
-*Refactor is in it's early stages. Your contributions and suggestions are more than welcome 😎*
+*🧪Refactor is in it's early stages and it is strictly experimental. Your contributions and suggestions are more than welcome*
 
 ## Installation
 ### Using npm

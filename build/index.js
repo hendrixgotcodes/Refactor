@@ -11,5 +11,5 @@ yargs_1.default
     .command(rename_1.default)
     .command(about_1.default)
     .conflicts("files", "directory")
-    .version("1.0.0")
+    .version("0.1.0")
     .parse();

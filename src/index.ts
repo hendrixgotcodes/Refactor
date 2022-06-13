@@ -8,5 +8,5 @@ yargs
   .command(renameCommand)
   .command(aboutCommand)
   .conflicts("files", "directory")
-  .version("0.0.1")
+  .version("0.1.0")
   .parse();

@@ -11,7 +11,7 @@ function printInfo() {
           "A CLI tool built to make developers more agile in refactoring large codebase.\n" +
           "Refactor is in it's early stages, contributions and suggestions are warmly welcome. Please reach out to me via Twitter.\n" +
           "_____________________________________________________________________________\n\n" +
-          "Version: 0.0.1\n" +
+          "Version: 0.1.0\n" +
           "Author: Samuel O. Asare.\n\n",
       );
     }

@@ -3,6 +3,7 @@ import * as fs from "fs/promises";
 import * as inquirer from "inquirer";
 import { createSpinner } from "nanospinner";
 import lodash from "lodash";
+import ansi_colors from "ansi-colors";
 
 async function renameFiles(arg: any) {
   const folderPath: string = path.resolve(arg.path);
@@ -76,7 +77,7 @@ async function renameFolder(args: any) {
       if (file.isDirectory()) {
         promptMessages.push({
           name: file.name,
-          message: `rename ${file.name}`,
+          message: `rename ${ansi_colors.bold.bgGreen(file.name)}`,
         });
       }
     });
@@ -102,7 +103,9 @@ async function renameFolder(args: any) {
     spinner.start();
 
     await Promise.all(operations);
-    spinner.success({ text: "done" });
+    spinner.success({
+      text: `Done. Refactored ${operations.length} directories.`,
+    });
   } catch (error) {
     console.log(error);
   }
